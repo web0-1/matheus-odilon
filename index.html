@@ -13,46 +13,93 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #ffffff;
-            color: #1e1e1e;
+            background: #0a0a0a;
+            color: #ffffff;
             line-height: 1.5;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f1a 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(46, 213, 115, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveDots 20s linear infinite;
+        }
+
+        @keyframes moveDots {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* WhatsApp Flutuante */
+        /* WhatsApp Flutuante - Estilo Neon */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: #25D366;
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 34px;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5), 0 4px 12px rgba(0,0,0,0.3);
             transition: all 0.3s;
             z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(37, 211, 102, 0.8);
+            }
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
-            background-color: #20b859;
+            transform: scale(1.15);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.8);
         }
 
-        /* Header / Navegação */
+        /* Header / Navegação - Glassmorphism */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -60,81 +107,107 @@
             padding: 20px 0;
             flex-wrap: wrap;
             gap: 16px;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.7);
+            border-radius: 80px;
+            padding: 16px 32px;
+            margin-top: 20px;
+            border: 1px solid rgba(46, 213, 115, 0.2);
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #2ed573);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: #2c7a4d;
         }
 
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 32px;
             list-style: none;
             flex-wrap: wrap;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #e0e0e0;
             font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.2s;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #2ed573, #00ff88);
+            transition: width 0.3s;
         }
 
         .nav-links a:hover {
-            color: #2c7a4d;
+            color: #2ed573;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .btn-primary {
-            background-color: #2c7a4d;
+            background: linear-gradient(135deg, #2ed573, #1e9b52);
             color: white;
             border: none;
-            padding: 12px 28px;
+            padding: 12px 32px;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             display: inline-block;
             text-decoration: none;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(46, 213, 115, 0.3);
         }
 
         .btn-primary:hover {
-            background-color: #1f5f3a;
-            transform: scale(0.98);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 213, 115, 0.5);
         }
 
         .btn-outline {
             background: transparent;
-            border: 2px solid #2c7a4d;
-            color: #2c7a4d;
-            padding: 10px 24px;
+            border: 2px solid #2ed573;
+            color: #2ed573;
+            padding: 10px 28px;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
             display: inline-block;
             text-decoration: none;
         }
 
         .btn-outline:hover {
-            background: #2c7a4d;
-            color: white;
+            background: #2ed573;
+            color: #0a0a0a;
+            box-shadow: 0 0 20px rgba(46, 213, 115, 0.5);
+            transform: translateY(-2px);
         }
 
+        /* Hero Section */
         .hero {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 48px;
-            padding: 40px 0 60px;
+            padding: 60px 0 80px;
             flex-wrap: wrap;
         }
 
@@ -144,20 +217,20 @@
         }
 
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
             letter-spacing: -1px;
-        }
-
-        .hero-content h1 span {
-            color: #2c7a4d;
+            background: linear-gradient(135deg, #fff, #2ed573, #00ffaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .hero-content p {
             font-size: 1.1rem;
-            color: #555;
+            color: #b0b0b0;
             margin-bottom: 32px;
             max-width: 500px;
         }
@@ -172,6 +245,21 @@
             flex: 1;
             text-align: center;
             min-width: 280px;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, #2ed573, #00ffaa);
+            border-radius: 32px;
+            opacity: 0.3;
+            filter: blur(20px);
+            z-index: -1;
         }
 
         .hero-image img {
@@ -179,38 +267,49 @@
             max-width: 380px;
             border-radius: 32px;
             object-fit: cover;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 2px solid rgba(46, 213, 115, 0.3);
         }
 
+        /* Stats - Cards Brilhantes */
         .stats {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 24px;
-            background: #f8f9fa;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
             border-radius: 48px;
             padding: 32px 40px;
             margin: 40px 0;
             text-align: center;
+            border: 1px solid rgba(46, 213, 115, 0.2);
         }
 
         .stat-item h3 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            color: #2c7a4d;
+            background: linear-gradient(135deg, #2ed573, #00ffaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .stat-item p {
-            color: #555;
+            color: #b0b0b0;
             font-weight: 500;
         }
 
+        /* About Section */
         .about {
             display: flex;
             gap: 48px;
             align-items: center;
-            margin: 60px 0;
+            margin: 80px 0;
             flex-wrap: wrap;
+            background: linear-gradient(135deg, rgba(46,213,115,0.05), rgba(0,0,0,0));
+            padding: 40px;
+            border-radius: 48px;
         }
 
         .about-text {
@@ -218,13 +317,22 @@
         }
 
         .about-text h2 {
-            font-size: 2rem;
-            margin-bottom: 16px;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #2ed573);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .about-text p {
+            color: #c0c0c0;
+            font-size: 1rem;
         }
 
         .badge {
-            background: #eef5f0;
-            color: #2c7a4d;
+            background: rgba(46, 213, 115, 0.2);
+            color: #2ed573;
             display: inline-block;
             padding: 6px 14px;
             border-radius: 30px;
@@ -232,14 +340,21 @@
             font-weight: 600;
             margin-right: 8px;
             margin-bottom: 8px;
+            border: 1px solid rgba(46, 213, 115, 0.3);
+            backdrop-filter: blur(5px);
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin: 60px 0 40px;
+            font-size: 2.2rem;
+            margin: 80px 0 40px;
+            background: linear-gradient(135deg, #fff, #2ed573);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
+        /* Cards Grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -248,35 +363,57 @@
         }
 
         .service-card, .plan-card {
-            background: #fff;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
             border-radius: 32px;
-            padding: 28px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: 0.2s;
-            border: 1px solid #eee;
+            padding: 32px;
+            transition: all 0.3s;
+            border: 1px solid rgba(46, 213, 115, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before, .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(46,213,115,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before, .plan-card:hover::before {
+            left: 100%;
         }
 
         .service-card:hover, .plan-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            border-color: rgba(46, 213, 115, 0.5);
+            box-shadow: 0 10px 30px rgba(46, 213, 115, 0.2);
         }
 
         .service-card h3, .plan-card h3 {
             font-size: 1.5rem;
             margin-bottom: 12px;
+            color: #2ed573;
         }
 
         .price {
             font-size: 2rem;
             font-weight: 800;
-            color: #2c7a4d;
+            background: linear-gradient(135deg, #2ed573, #00ffaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin: 16px 0;
         }
 
         .price span {
             font-size: 1rem;
             font-weight: 400;
-            color: #666;
+            color: #888;
         }
 
         .service-card ul, .plan-card ul {
@@ -289,23 +426,28 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            color: #d0d0d0;
         }
 
         .badge-plan {
-            background: #2c7a4d;
+            background: linear-gradient(135deg, #2ed573, #1e9b52);
             color: white;
             font-size: 0.7rem;
             padding: 4px 12px;
             border-radius: 30px;
             display: inline-block;
             margin-bottom: 12px;
+            font-weight: 700;
         }
 
+        /* Testimonials */
         .testimonials {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, rgba(46,213,115,0.1), rgba(0,0,0,0.5));
+            backdrop-filter: blur(10px);
             border-radius: 48px;
             padding: 40px 24px;
-            margin: 60px 0;
+            margin: 80px 0;
+            border: 1px solid rgba(46, 213, 115, 0.2);
         }
 
         .testimonial-grid {
@@ -316,13 +458,24 @@
         }
 
         .testimonial-card {
-            background: white;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
             border-radius: 28px;
             padding: 24px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            border: 1px solid rgba(46, 213, 115, 0.2);
+            transition: all 0.3s;
         }
 
-        /* Contato simplificado - só emoji + nome */
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: #2ed573;
+        }
+
+        .testimonial-card p {
+            color: #e0e0e0;
+        }
+
+        /* Contact Section */
         .contact-links {
             display: flex;
             justify-content: center;
@@ -332,39 +485,42 @@
         }
 
         .contact-card {
-            background: #f8f9fa;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
             border-radius: 60px;
             padding: 16px 32px;
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: #1e1e1e;
+            color: #fff;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.2s;
-            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+            border: 1px solid rgba(46, 213, 115, 0.3);
         }
 
         .contact-card:hover {
-            background: #2c7a4d;
-            color: white;
+            background: linear-gradient(135deg, #2ed573, #1e9b52);
             transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(46, 213, 115, 0.4);
         }
 
         .contact-card span {
             font-size: 1.3rem;
         }
 
+        /* Footer */
         footer {
             text-align: center;
             padding: 40px 0 30px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid rgba(46, 213, 115, 0.2);
             margin-top: 40px;
-            color: #777;
+            color: #888;
             font-size: 0.85rem;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
@@ -372,6 +528,7 @@
             .hero {
                 flex-direction: column;
                 text-align: center;
+                padding: 40px 0;
             }
             .hero-content h1 {
                 font-size: 2.2rem;
@@ -382,6 +539,8 @@
             .navbar {
                 flex-direction: column;
                 text-align: center;
+                border-radius: 40px;
+                padding: 16px 24px;
             }
             .nav-links {
                 justify-content: center;
@@ -389,17 +548,18 @@
             }
             .section-title {
                 font-size: 1.8rem;
+                margin: 50px 0 30px;
             }
             .stats {
                 padding: 24px 20px;
             }
             .stat-item h3 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 28px;
+                width: 55px;
+                height: 55px;
+                font-size: 30px;
                 bottom: 20px;
                 right: 20px;
             }
@@ -407,11 +567,14 @@
                 padding: 12px 24px;
                 font-size: 0.9rem;
             }
+            .about {
+                padding: 24px;
+            }
         }
 
         @media (max-width: 480px) {
             .hero-content h1 {
-                font-size: 1.9rem;
+                font-size: 1.8rem;
             }
             .btn-primary, .btn-outline {
                 padding: 10px 20px;
@@ -421,9 +584,29 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2ed573, #1e9b52);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2ed573;
+        }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+
     <!-- Botão WhatsApp Flutuante -->
     <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Vim%20pelo%20site%20e%20quero%20começar%20agora!" class="whatsapp-float" target="_blank">
         💬
@@ -432,7 +615,7 @@
     <div class="container">
         <!-- Navegação -->
         <nav class="navbar">
-            <div class="logo">Matheus <span>Odilon</span></div>
+            <div class="logo">⚡ Matheus Odilon</div>
             <ul class="nav-links">
                 <li><a href="#home">Início</a></li>
                 <li><a href="#sobre">Sobre</a></li>
@@ -445,11 +628,11 @@
         <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-content">
-                <h1>Transforme seu corpo<br><span>e sua vida</span></h1>
+                <h1>Transforme seu corpo<br><span style="background: linear-gradient(135deg, #2ed573, #00ffaa); -webkit-background-clip: text; background-clip: text; color: transparent;">e sua vida</span></h1>
                 <p>Metodologia exclusiva com resultados garantidos. Treinos personalizados para você alcançar seus objetivos com saúde e eficiência.</p>
                 <div class="hero-buttons">
-                    <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Vim%20pelo%20site%20e%20quero%20começar%20agora!" class="btn-primary" target="_blank">Começar agora</a>
-                    <a href="#servicos" class="btn-outline">Conhecer serviços</a>
+                    <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Vim%20pelo%20site%20e%20quero%20começar%20agora!" class="btn-primary" target="_blank">🔥 Começar agora</a>
+                    <a href="#servicos" class="btn-outline">💪 Conhecer serviços</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -470,39 +653,39 @@
                 <h2>Mais de 2 anos transformando vidas através do esporte</h2>
                 <p>Olá, meu nome é Matheus. Sou formado em Educação Física, ex-atleta profissional de futebol e, atualmente, atuo como professor de Educação Física, personal trainer e preparador de atletas. Minha missão é ajudar você a descobrir seu potencial máximo através de um método único que une ciência, motivação e resultados.</p>
                 <div style="margin: 24px 0;">
-                    <span class="badge">CREF 070786</span>
-                    <span class="badge">Especialista em Biomecânica</span>
-                    <span class="badge">Fisiologia do Exercício</span>
-                    <span class="badge">Preparação de Atletas</span>
+                    <span class="badge">🏅 CREF 070786</span>
+                    <span class="badge">🎯 Especialista em Biomecânica</span>
+                    <span class="badge">💪 Fisiologia do Exercício</span>
+                    <span class="badge">⚡ Preparação de Atletas</span>
                 </div>
             </div>
         </section>
 
         <!-- Serviços -->
         <section id="servicos">
-            <h2 class="section-title">Como posso te ajudar?</h2>
+            <h2 class="section-title">⚡ Como posso te ajudar?</h2>
             <div class="cards-grid">
                 <div class="service-card">
                     <h3>💻 Consultoria online</h3>
-                    <div class="price">R$ 120<span>/mês</span></div>
+                    <div class="price">R$ 100<span>/mês</span></div>
                     <ul>
                         <li>✅ Planilha de treino mensal</li>
                         <li>✅ Suporte via WhatsApp</li>
                         <li>✅ Ajustes de cargas semanais</li>
                         <li>✅ Correção de execução por vídeo</li>
                     </ul>
-                    <a href="https://wa.me/5521994812056?text=Olá!%20Tenho%20interesse%20na%20Consultoria%20online%20(R$120/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Quero este serviço</a>
+                    <a href="https://wa.me/5521994812056?text=Olá!%20Tenho%20interesse%20na%20Consultoria%20online%20(R$120/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">🔥 Quero este serviço</a>
                 </div>
                 <div class="service-card">
-                    <h3>📊 Avaliação física</h3>
-                    <div class="price">R$ 150<span>/avulso</span></div>
+                    <h3>📊 Avaliação física + Ficha</h3>
+                    <div class="price">R$ 80<span>/avulso</span></div>
                     <ul>
                         <li>✅ Medidas e composição corporal</li>
                         <li>✅ Testes de força e flexibilidade</li>
                         <li>✅ Diagnóstico completo</li>
                         <li>✅ Devolutiva detalhada</li>
                     </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20agendar%20uma%20Avaliação%20física%20(R$150)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Agendar avaliação</a>
+                    <a href="https://wa.me/5521994812056?text=Quero%20agendar%20uma%20Avaliação%20física%20(R$150)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">📅 Agendar avaliação</a>
                 </div>
                 <div class="service-card">
                     <h3>🏋️ Acompanhamento nos treinos</h3>
@@ -513,17 +696,17 @@
                         <li>✅ Motivação e ajustes</li>
                         <li>✅ Periodização avançada</li>
                     </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20o%20acompanhamento%20nos%20treinos%20(R$180/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Quero treinar</a>
+                    <a href="https://wa.me/5521994812056?text=Quero%20o%20acompanhamento%20nos%20treinos%20(R$180/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">💪 Quero treinar</a>
                 </div>
             </div>
         </section>
 
         <!-- Planos -->
         <section id="planos">
-            <h2 class="section-title">Planos especiais</h2>
+            <h2 class="section-title">🏆 Planos especiais</h2>
             <div class="cards-grid">
                 <div class="plan-card">
-                    <div class="badge-plan">Mais escolhido</div>
+                    <div class="badge-plan">🌟 Mais escolhido</div>
                     <h3>Plano Mensal</h3>
                     <div class="price">R$ 247<span>/mês</span></div>
                     <ul>
@@ -532,10 +715,10 @@
                         <li>✅ Acompanhamento via app</li>
                         <li>✅ Treino personalizado</li>
                     </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20o%20Plano%20Mensal%20(R$247/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Assinar agora</a>
+                    <a href="https://wa.me/5521994812056?text=Quero%20o%20Plano%20Mensal%20(R$247/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">✨ Assinar agora</a>
                 </div>
                 <div class="plan-card">
-                    <div class="badge-plan">Melhor custo-benefício</div>
+                    <div class="badge-plan">💰 Melhor custo-benefício</div>
                     <h3>Plano Trimestral</h3>
                     <div class="price">R$ 197<span>/mês</span></div>
                     <ul>
@@ -544,46 +727,46 @@
                         <li>✅ Suporte prioritário 24/7</li>
                         <li>✅ Treino + acompanhamento nutricional</li>
                     </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20o%20Plano%20Trimestral%20(R$197/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Quero evoluir</a>
+                    <a href="https://wa.me/5521994812056?text=Quero%20o%20Plano%20Trimestral%20(R$197/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">🚀 Quero evoluir</a>
                 </div>
                 <div class="plan-card">
-                    <h3>Ficha de treino + acompanhamento</h3>
+                    <h3>📋 Ficha de treino + acompanhamento</h3>
                     <div class="price">R$ 80<span>/único</span></div>
                     <ul>
                         <li>✅ Ficha personalizada</li>
                         <li>✅ Revisão após 30 dias</li>
                         <li>✅ Explicação detalhada dos exercícios</li>
                     </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20a%20ficha%20de%20treino%20personalizada%20(R$80)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Quero minha ficha</a>
+                    <a href="https://wa.me/5521994812056?text=Quero%20a%20ficha%20de%20treino%20personalizada%20(R$80)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">📝 Quero minha ficha</a>
                 </div>
             </div>
         </section>
 
         <!-- Depoimentos -->
         <div class="testimonials">
-            <h2 class="section-title" style="margin-top:0;">O que dizem meus clientes</h2>
+            <h2 class="section-title" style="margin-top:0;">💬 O que dizem meus clientes</h2>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <p>⭐️⭐️⭐️⭐️⭐️</p>
                     <p>"Em 3 meses com o Matheus, minha evolução foi absurda! Atendimento online superou expectativas."</p>
-                    <strong>— Renata M.</strong>
+                    <strong style="color: #2ed573;">— Renata M.</strong>
                 </div>
                 <div class="testimonial-card">
                     <p>⭐️⭐️⭐️⭐️⭐️</p>
                     <p>"Melhor preparador que já tive. Sei que sou atleta amador, mas o cuidado é nível profissional."</p>
-                    <strong>— Carlos Lima</strong>
+                    <strong style="color: #2ed573;">— Carlos Lima</strong>
                 </div>
                 <div class="testimonial-card">
                     <p>⭐️⭐️⭐️⭐️⭐️</p>
                     <p>"Avaliação física muito completa e os treinos realmente personalizados. Recomendo demais!"</p>
-                    <strong>— Juliana S.</strong>
+                    <strong style="color: #2ed573;">— Juliana S.</strong>
                 </div>
             </div>
         </div>
 
-        <!-- Contato - Simplificado (só emoji + nome) -->
+        <!-- Contato -->
         <section id="contato">
-            <h2 class="section-title">Vamos transformar seu corpo?</h2>
+            <h2 class="section-title">🚀 Vamos transformar seu corpo?</h2>
             <div class="contact-links">
                 <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Quero%20mudar%20de%20vida!" class="contact-card" target="_blank">
                     <span>💬</span> WhatsApp
@@ -598,7 +781,7 @@
         </section>
 
         <footer>
-            <p>Matheus Odilon • CREF 070786 • Educação Física • Personal Trainer & Preparador de Atletas</p>
+            <p>🔥 Matheus Odilon • CREF 070786 • Educação Física • Personal Trainer & Preparador de Atletas</p>
             <p style="margin-top: 10px;">© 2026 | Transformando vidas com ciência e dedicação</p>
         </footer>
     </div>
