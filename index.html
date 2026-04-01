@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Matheus Odilon | Personal Trainer Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1e1e1e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #20b859;
+        }
+
+        /* Header / Navegação */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #2c7a4d;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2c7a4d;
+        }
+
+        .btn-primary {
+            background-color: #2c7a4d;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background-color: #1f5f3a;
+            transform: scale(0.98);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2c7a4d;
+            color: #2c7a4d;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background: #2c7a4d;
+            color: white;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 48px;
+            padding: 40px 0 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 span {
+            color: #2c7a4d;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            min-width: 280px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 32px;
+            object-fit: cover;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            background: #f8f9fa;
+            border-radius: 48px;
+            padding: 32px 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #2c7a4d;
+        }
+
+        .stat-item p {
+            color: #555;
+            font-weight: 500;
+        }
+
+        .about {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            background: #eef5f0;
+            color: #2c7a4d;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 60px 0 40px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .service-card, .plan-card {
+            background: #fff;
+            border-radius: 32px;
+            padding: 28px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #eee;
+        }
+
+        .service-card:hover, .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-card h3, .plan-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #2c7a4d;
+            margin: 16px 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .service-card ul, .plan-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .service-card li, .plan-card li {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge-plan {
+            background: #2c7a4d;
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .testimonials {
+            background: #f8f9fa;
+            border-radius: 48px;
+            padding: 40px 24px;
+            margin: 60px 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+        }
+
+        /* Contato simplificado - só emoji + nome */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .contact-card {
+            background: #f8f9fa;
+            border-radius: 60px;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .contact-card:hover {
+            background: #2c7a4d;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .contact-card span {
+            font-size: 1.3rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 20px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .stats {
+                padding: 24px 20px;
+            }
+            .stat-item h3 {
+                font-size: 1.6rem;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 28px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .contact-card {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.9rem;
+            }
+            .btn-primary, .btn-outline {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão WhatsApp Flutuante -->
+    <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Vim%20pelo%20site%20e%20quero%20começar%20agora!" class="whatsapp-float" target="_blank">
+        💬
+    </a>
+
+    <div class="container">
+        <!-- Navegação -->
+        <nav class="navbar">
+            <div class="logo">Matheus <span>Odilon</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#planos">Planos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Transforme seu corpo<br><span>e sua vida</span></h1>
+                <p>Metodologia exclusiva com resultados garantidos. Treinos personalizados para você alcançar seus objetivos com saúde e eficiência.</p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Vim%20pelo%20site%20e%20quero%20começar%20agora!" class="btn-primary" target="_blank">Começar agora</a>
+                    <a href="#servicos" class="btn-outline">Conhecer serviços</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="mt.jpeg" alt="Matheus Odilon" onerror="this.src='https://via.placeholder.com/400x450?text=Matheus+Odilon'">
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-item"><h3>+500</h3><p>Clientes ativos</p></div>
+            <div class="stat-item"><h3>10+</h3><p>Anos de experiência</p></div>
+            <div class="stat-item"><h3>98%</h3><p>de satisfação</p></div>
+        </div>
+
+        <!-- Sobre -->
+        <section id="sobre" class="about">
+            <div class="about-text">
+                <h2>Mais de 10 anos transformando vidas através do esporte</h2>
+                <p>Olá, meu nome é Matheus. Sou formado em Educação Física, ex-atleta profissional de futebol e, atualmente, atuo como professor de Educação Física, personal trainer e preparador de atletas. Minha missão é ajudar você a descobrir seu potencial máximo através de um método único que une ciência, motivação e resultados.</p>
+                <div style="margin: 24px 0;">
+                    <span class="badge">CREF 070786</span>
+                    <span class="badge">Especialista em Biomecânica</span>
+                    <span class="badge">Fisiologia do Exercício</span>
+                    <span class="badge">Preparação de Atletas</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Serviços -->
+        <section id="servicos">
+            <h2 class="section-title">Como posso te ajudar?</h2>
+            <div class="cards-grid">
+                <div class="service-card">
+                    <h3>💻 Consultoria online</h3>
+                    <div class="price">R$ 120<span>/mês</span></div>
+                    <ul>
+                        <li>✅ Planilha de treino mensal</li>
+                        <li>✅ Suporte via WhatsApp</li>
+                        <li>✅ Ajustes de cargas semanais</li>
+                        <li>✅ Correção de execução por vídeo</li>
+                    </ul>
+                    <a href="https://wa.me/5521994812056?text=Olá!%20Tenho%20interesse%20na%20Consultoria%20online%20(R$120/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Quero este serviço</a>
+                </div>
+                <div class="service-card">
+                    <h3>📊 Avaliação física</h3>
+                    <div class="price">R$ 150<span>/avulso</span></div>
+                    <ul>
+                        <li>✅ Medidas e composição corporal</li>
+                        <li>✅ Testes de força e flexibilidade</li>
+                        <li>✅ Diagnóstico completo</li>
+                        <li>✅ Devolutiva detalhada</li>
+                    </ul>
+                    <a href="https://wa.me/5521994812056?text=Quero%20agendar%20uma%20Avaliação%20física%20(R$150)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Agendar avaliação</a>
+                </div>
+                <div class="service-card">
+                    <h3>🏋️ Acompanhamento nos treinos</h3>
+                    <div class="price">R$ 180<span>/mês</span></div>
+                    <ul>
+                        <li>✅ Presencial ou online</li>
+                        <li>✅ Correção de execução em tempo real</li>
+                        <li>✅ Motivação e ajustes</li>
+                        <li>✅ Periodização avançada</li>
+                    </ul>
+                    <a href="https://wa.me/5521994812056?text=Quero%20o%20acompanhamento%20nos%20treinos%20(R$180/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Quero treinar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Planos -->
+        <section id="planos">
+            <h2 class="section-title">Planos especiais</h2>
+            <div class="cards-grid">
+                <div class="plan-card">
+                    <div class="badge-plan">Mais escolhido</div>
+                    <h3>Plano Mensal</h3>
+                    <div class="price">R$ 247<span>/mês</span></div>
+                    <ul>
+                        <li>✅ 4 sessões por semana</li>
+                        <li>✅ Avaliação física mensal</li>
+                        <li>✅ Acompanhamento via app</li>
+                        <li>✅ Treino personalizado</li>
+                    </ul>
+                    <a href="https://wa.me/5521994812056?text=Quero%20o%20Plano%20Mensal%20(R$247/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Assinar agora</a>
+                </div>
+                <div class="plan-card">
+                    <div class="badge-plan">Melhor custo-benefício</div>
+                    <h3>Plano Trimestral</h3>
+                    <div class="price">R$ 197<span>/mês</span></div>
+                    <ul>
+                        <li>✅ 5 sessões por semana</li>
+                        <li>✅ Avaliação quinzenal</li>
+                        <li>✅ Suporte prioritário 24/7</li>
+                        <li>✅ Treino + acompanhamento nutricional</li>
+                    </ul>
+                    <a href="https://wa.me/5521994812056?text=Quero%20o%20Plano%20Trimestral%20(R$197/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Quero evoluir</a>
+                </div>
+                <div class="plan-card">
+                    <h3>Ficha de treino + acompanhamento</h3>
+                    <div class="price">R$ 80<span>/único</span></div>
+                    <ul>
+                        <li>✅ Ficha personalizada</li>
+                        <li>✅ Revisão após 30 dias</li>
+                        <li>✅ Explicação detalhada dos exercícios</li>
+                    </ul>
+                    <a href="https://wa.me/5521994812056?text=Quero%20a%20ficha%20de%20treino%20personalizada%20(R$80)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">Quero minha ficha</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Depoimentos -->
+        <div class="testimonials">
+            <h2 class="section-title" style="margin-top:0;">O que dizem meus clientes</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>⭐️⭐️⭐️⭐️⭐️</p>
+                    <p>"Em 3 meses com o Matheus, minha evolução foi absurda! Atendimento online superou expectativas."</p>
+                    <strong>— Renata M.</strong>
+                </div>
+                <div class="testimonial-card">
+                    <p>⭐️⭐️⭐️⭐️⭐️</p>
+                    <p>"Melhor preparador que já tive. Sei que sou atleta amador, mas o cuidado é nível profissional."</p>
+                    <strong>— Carlos Lima</strong>
+                </div>
+                <div class="testimonial-card">
+                    <p>⭐️⭐️⭐️⭐️⭐️</p>
+                    <p>"Avaliação física muito completa e os treinos realmente personalizados. Recomendo demais!"</p>
+                    <strong>— Juliana S.</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contato - Simplificado (só emoji + nome) -->
+        <section id="contato">
+            <h2 class="section-title">Vamos transformar seu corpo?</h2>
+            <div class="contact-links">
+                <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Quero%20mudar%20de%20vida!" class="contact-card" target="_blank">
+                    <span>💬</span> WhatsApp
+                </a>
+                <a href="https://www.instagram.com/matheusodilon31?igsh=MTZ5Nzd3ZnMzeGU5bw==" class="contact-card" target="_blank">
+                    <span>📷</span> Instagram
+                </a>
+                <a href="mailto:Matheusodilon011@gamil.com" class="contact-card">
+                    <span>✉️</span> E-mail
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>Matheus Odilon • CREF 070786 • Educação Física • Personal Trainer & Preparador de Atletas</p>
+            <p style="margin-top: 10px;">© 2026 | Transformando vidas com ciência e dedicação</p>
+        </footer>
+    </div>
+</body>
+</html>
