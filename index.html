@@ -1,779 +1,1778 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Matheus Odilon | Personal Trainer Premium</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minha Transformação em 90 Dias | Resultados Reais</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ===== SEU CSS ORIGINAL (mantido) ===== */
+        :root {
+            --bg: #02040a;
+            --bg-elevated: #0a0e17;
+            --bg-card: rgba(15, 20, 30, 0.7);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-accent: rgba(245, 158, 11, 0.25);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            --accent-light: #fbbf24;
+            --success: #10b981;
+            --danger: #ef4444;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.5;
-            scroll-behavior: smooth;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f1a 100%);
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
-        .bg-animation::before {
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== OVERLAY DE AUTENTICAÇÃO (CADASTRO/LOGIN) ===== */
+        #auth-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(2, 4, 10, 0.94);
+            backdrop-filter: blur(14px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease;
+        }
+        #auth-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .auth-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-accent);
+            border-radius: 24px;
+            padding: 40px 32px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            animation: fadeUp 0.6s ease-out;
+        }
+        .auth-box .lock-icon {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .auth-box h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+        }
+        .auth-box h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .auth-box .sub {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+        }
+        .auth-box .field {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+        .auth-box .field label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+        .auth-box input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .auth-box input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+        }
+        .auth-box input::placeholder {
+            color: var(--text-dim);
+        }
+        .auth-btn {
+            width: 100%;
+            margin-top: 8px;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent), #f97316);
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.25);
+        }
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(245, 158, 11, 0.35);
+        }
+        .auth-error {
+            font-size: 0.85rem;
+            margin-top: 12px;
+            min-height: 24px;
+            font-weight: 500;
+        }
+        .auth-error.error { color: var(--danger); }
+        .auth-error.success { color: var(--success); }
+        .auth-box .helper {
+            margin-top: 18px;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+        .auth-box .switch-link {
+            color: var(--accent-light);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .auth-box .switch-link:hover {
+            color: var(--accent);
+        }
+
+        /* ===== SEU CSS ORIGINAL (restante, mantido) ===== */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+        .hero::before {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle, rgba(46, 213, 115, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveDots 20s linear infinite;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 158, 11, 0.12), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(16, 185, 129, 0.05), transparent);
+            pointer-events: none;
         }
-
-        @keyframes moveDots {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(50px, 50px);
-            }
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 40%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 40%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            animation: fadeUp 0.9s ease-out;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--glass);
+            border: 1px solid var(--border-accent);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5.5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+        }
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 50%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+            color: var(--text-muted);
+            max-width: 480px;
+            margin: 0 auto 32px;
+            font-weight: 400;
+            line-height: 1.55;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent), #f97316);
+            color: #000;
+            font-weight: 800;
+            font-size: 0.9rem;
+            padding: 12px 32px;
+            border-radius: 100px;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.28);
+            animation: pulse 3s infinite;
+        }
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(245, 158, 11, 0.38);
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 36px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat .num {
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: var(--accent-light);
+            display: block;
+            line-height: 1;
+        }
+        .hero-stat .label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-top: 4px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 1;
+            padding: 0 20px;
         }
 
-        /* WhatsApp Flutuante - Estilo Neon */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
+        section { padding: 70px 0; position: relative; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-header .eyebrow {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .section-header h2 {
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 480px;
+            margin: 10px auto 0;
+            font-size: 0.95rem;
+        }
+
+        .compare-section {
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 100%);
+        }
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .compare-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .compare-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-accent);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 30px var(--accent-glow);
+        }
+        .compare-card .img-wrap {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            position: relative;
+            background: #0d1117;
+        }
+        .compare-card .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .compare-card:hover .img-wrap img { transform: scale(1.04); }
+        .compare-card .tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .compare-card.antes .tag { background: rgba(239, 68, 68, 0.85); color: #fff; }
+        .compare-card.depois .tag { background: rgba(16, 185, 129, 0.85); color: #fff; }
+        .compare-card .info { padding: 14px 16px; }
+        .compare-card .info h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .compare-card .info .meta {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+        .compare-card .info .meta strong { color: var(--text); }
+
+        .compare-divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
-            text-decoration: none;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5), 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-            z-index: 1000;
-            animation: pulse 2s infinite;
+            gap: 12px;
+            margin: 28px 0;
         }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 30px rgba(37, 211, 102, 0.8);
-            }
+        .compare-divider .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
+            max-width: 140px;
         }
-
-        .whatsapp-float:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 30px rgba(37, 211, 102, 0.8);
-        }
-
-        /* Header / Navegação - Glassmorphism */
-        .navbar {
+        .compare-divider .arrow {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #f97316);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            flex-wrap: wrap;
-            gap: 16px;
-            backdrop-filter: blur(10px);
-            background: rgba(10, 10, 10, 0.7);
-            border-radius: 80px;
-            padding: 16px 32px;
-            margin-top: 20px;
-            border: 1px solid rgba(46, 213, 115, 0.2);
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, #2ed573);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #e0e0e0;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: linear-gradient(90deg, #2ed573, #00ff88);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #2ed573;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #2ed573, #1e9b52);
-            color: white;
-            border: none;
-            padding: 12px 32px;
-            border-radius: 40px;
-            font-weight: 700;
+            justify-content: center;
+            color: #000;
             font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-            text-decoration: none;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(46, 213, 115, 0.3);
+            animation: float 3s ease-in-out infinite;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(46, 213, 115, 0.5);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #2ed573;
-            color: #2ed573;
-            padding: 10px 28px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn-outline:hover {
-            background: #2ed573;
-            color: #0a0a0a;
-            box-shadow: 0 0 20px rgba(46, 213, 115, 0.5);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 48px;
-            padding: 60px 0 80px;
-            flex-wrap: wrap;
-        }
-
-        .hero-content {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, #fff, #2ed573, #00ffaa);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: #b0b0b0;
-            margin-bottom: 32px;
-            max-width: 500px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .hero-image {
-            flex: 1;
-            text-align: center;
-            min-width: 280px;
-            position: relative;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(135deg, #2ed573, #00ffaa);
-            border-radius: 32px;
-            opacity: 0.3;
-            filter: blur(20px);
-            z-index: -1;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 380px;
-            border-radius: 32px;
-            object-fit: cover;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            border: 2px solid rgba(46, 213, 115, 0.3);
-        }
-
-        /* Stats - Cards Brilhantes */
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 24px;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 48px;
-            padding: 32px 40px;
-            margin: 40px 0;
-            text-align: center;
-            border: 1px solid rgba(46, 213, 115, 0.2);
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #2ed573, #00ffaa);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .stat-item p {
-            color: #b0b0b0;
-            font-weight: 500;
-        }
-
-        /* About Section */
-        .about {
-            display: flex;
-            gap: 48px;
-            align-items: center;
-            margin: 80px 0;
-            flex-wrap: wrap;
-            background: linear-gradient(135deg, rgba(46,213,115,0.05), rgba(0,0,0,0));
-            padding: 40px;
-            border-radius: 48px;
-        }
-
-        .about-text {
-            flex: 1;
-        }
-
-        .about-text h2 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff, #2ed573);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .about-text p {
-            color: #c0c0c0;
-            font-size: 1rem;
-        }
-
-        .badge {
-            background: rgba(46, 213, 115, 0.2);
-            color: #2ed573;
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            border: 1px solid rgba(46, 213, 115, 0.3);
-            backdrop-filter: blur(5px);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin: 80px 0 40px;
-            background: linear-gradient(135deg, #fff, #2ed573);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
+        .numbers-bar {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.07), rgba(16, 185, 129, 0.04));
+            border: 1px solid var(--border-accent);
+            border-radius: 14px;
+            padding: 24px 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            text-align: center;
+            backdrop-filter: blur(6px);
         }
-
-        .service-card, .plan-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 32px;
-            padding: 32px;
-            transition: all 0.3s;
-            border: 1px solid rgba(46, 213, 115, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before, .plan-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(46,213,115,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .service-card:hover::before, .plan-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover, .plan-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(46, 213, 115, 0.5);
-            box-shadow: 0 10px 30px rgba(46, 213, 115, 0.2);
-        }
-
-        .service-card h3, .plan-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-            color: #2ed573;
-        }
-
-        .price {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #2ed573, #00ffaa);
+        .numbers-bar .n-item .n-val {
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent;
-            margin: 16px 0;
+            line-height: 1;
+        }
+        .numbers-bar .n-item .n-label {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
         }
 
-        .price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #888;
+        .workout-section { background: var(--bg-elevated); }
+        .accordion { max-width: 720px; margin: 0 auto; }
+        .acc-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+        .acc-item:hover { border-color: rgba(245, 158, 11, 0.12); }
+        .acc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .acc-header:hover { background: rgba(255,255,255,0.015); }
+        .acc-header .day-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .acc-header .day-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .acc-header .day-name { font-weight: 700; font-size: 0.9rem; }
+        .acc-header .day-type {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin-left: 6px;
+        }
+        .acc-header .acc-icon {
+            color: var(--text-dim);
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+        .acc-header.active .acc-icon { transform: rotate(180deg); color: var(--accent); }
+        .acc-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+            padding: 0 18px;
+        }
+        .acc-body.open {
+            max-height: 650px;
+            padding: 0 18px 18px;
+        }
+        .exercise-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .exercise-row:last-child { border-bottom: none; }
+        .exercise-row .ex-name {
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .exercise-row .ex-sets {
+            font-size: 0.75rem;
+            color: var(--accent-light);
+            font-weight: 600;
+            font-family: 'SF Mono', monospace;
+            background: rgba(245, 158, 11, 0.07);
+            padding: 3px 10px;
+            border-radius: 5px;
+        }
+        .acc-footer {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .service-card ul, .plan-card ul {
+        /* ===== DIET TABS ===== */
+        .diet-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .diet-tab {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 22px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        .diet-tab:hover { border-color: var(--border-accent); color: var(--text); }
+        .diet-tab.active {
+            background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(245,158,11,0.05));
+            border-color: var(--accent);
+            color: var(--accent-light);
+        }
+
+        .diet-day {
+            display: none;
+        }
+        .diet-day.active {
+            display: block;
+            animation: fadeUp 0.4s ease-out;
+        }
+
+        .meal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            transition: all 0.25s ease;
+            margin-bottom: 10px;
+        }
+        .meal-card:hover {
+            border-color: var(--border-accent);
+            transform: translateX(3px);
+        }
+        .meal-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .meal-content { flex: 1; }
+        .meal-content h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+        .meal-content .time {
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .meal-content ul {
             list-style: none;
-            margin: 20px 0;
+            padding: 0;
+            margin: 0;
+        }
+        .meal-content ul li {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            padding: 2px 0;
+            line-height: 1.5;
         }
 
-        .service-card li, .plan-card li {
-            margin: 12px 0;
+        .diet-cycle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            margin-top: 28px;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .diet-cycle h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #d0d0d0;
         }
-
-        .badge-plan {
-            background: linear-gradient(135deg, #2ed573, #1e9b52);
-            color: white;
-            font-size: 0.7rem;
-            padding: 4px 12px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            background: linear-gradient(135deg, rgba(46,213,115,0.1), rgba(0,0,0,0.5));
-            backdrop-filter: blur(10px);
-            border-radius: 48px;
-            padding: 40px 24px;
-            margin: 80px 0;
-            border: 1px solid rgba(46, 213, 115, 0.2);
-        }
-
-        .testimonial-grid {
+        .diet-cycle .cycle-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+        }
+        .diet-cycle .cycle-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.78rem;
+        }
+        .diet-cycle .cycle-item .day-label {
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .diet-cycle .cycle-item .day-plan {
+            color: var(--text-muted);
         }
 
-        .testimonial-card {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            border-radius: 28px;
-            padding: 24px;
-            border: 1px solid rgba(46, 213, 115, 0.2);
-            transition: all 0.3s;
+        .cheap-tips {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            margin-top: 20px;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            border-color: #2ed573;
-        }
-
-        .testimonial-card p {
-            color: #e0e0e0;
-        }
-
-        /* Contact Section */
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin: 40px 0;
-        }
-
-        .contact-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 60px;
-            padding: 16px 32px;
+        .cheap-tips h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s;
-            border: 1px solid rgba(46, 213, 115, 0.3);
+            gap: 8px;
         }
-
-        .contact-card:hover {
-            background: linear-gradient(135deg, #2ed573, #1e9b52);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(46, 213, 115, 0.4);
+        .cheap-tips .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 8px;
         }
-
-        .contact-card span {
-            font-size: 1.3rem;
-        }
-
-        /* Footer */
-        footer {
+        .cheap-tips .tip-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
             text-align: center;
-            padding: 40px 0 30px;
-            border-top: 1px solid rgba(46, 213, 115, 0.2);
-            margin-top: 40px;
-            color: #888;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+        }
+        .cheap-tips .tip-item .emoji {
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .cheap-tips .tip-item strong {
+            color: var(--text);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .cheap-tips .tip-item span {
+            color: var(--text-muted);
         }
 
-        /* Responsive */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        .tip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tip-card:hover::before { opacity: 1; }
+        .tip-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-accent);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.25);
+        }
+        .tip-card .tip-num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: rgba(245, 158, 11, 0.1);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .tip-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--accent-light);
+        }
+        .tip-card p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+        .testimonial .quote-mark {
+            font-size: 4.5rem;
+            line-height: 1;
+            color: rgba(245, 158, 11, 0.08);
+            font-family: Georgia, serif;
+            margin-bottom: -20px;
+        }
+        .testimonial blockquote {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 300;
+            line-height: 1.55;
+            color: var(--text);
+            font-style: italic;
+        }
+        .testimonial cite {
+            display: block;
+            margin-top: 20px;
+            font-style: normal;
+        }
+        .testimonial cite .name {
+            font-weight: 700;
+            color: var(--accent-light);
+            font-size: 0.95rem;
+        }
+        .testimonial cite .role {
+            color: var(--text-dim);
+            font-size: 0.78rem;
+            margin-top: 2px;
+        }
+
+        footer {
+            background: #010203;
+            border-top: 1px solid var(--border);
+            padding: 36px 20px 24px;
+            text-align: center;
+        }
+        footer .socials {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        footer .socials a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            transition: all 0.25s ease;
+        }
+        footer .socials a:hover {
+            color: var(--accent);
+            border-color: var(--border-accent);
+            transform: translateY(-2px);
+        }
+        footer p { color: var(--text-dim); font-size: 0.78rem; }
+        footer .heart { color: var(--accent); }
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 0.78rem;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 6px;
+        }
+        .logout-btn:hover { color: var(--accent); }
+
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
+            section { padding: 48px 0; }
+            .container { padding: 0 14px; }
+            .hero { min-height: 70vh; padding: 0 16px; }
+            .hero-badge { font-size: 0.6rem; padding: 5px 12px; margin-bottom: 16px; }
+            .hero-sub { font-size: 0.85rem; margin-bottom: 24px; }
+            .hero-cta { padding: 10px 26px; font-size: 0.8rem; }
+            .hero-stats { gap: 20px; margin-top: 28px; }
+            .hero-stat .num { font-size: 1.4rem; }
+            .hero-stat .label { font-size: 0.6rem; }
+
+            .section-header { margin-bottom: 28px; }
+            .section-header h2 { font-size: 1.3rem; }
+            .section-header p { font-size: 0.82rem; margin-top: 6px; }
+            .section-header .eyebrow { font-size: 0.6rem; margin-bottom: 6px; }
+
+            .compare-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                max-width: 100%;
             }
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 40px 0;
+            .compare-card { border-radius: 12px; }
+            .compare-card .img-wrap { aspect-ratio: 3/4; }
+            .compare-card .tag { top: 6px; left: 6px; padding: 3px 8px; font-size: 0.55rem; }
+            .compare-card .info { padding: 10px 10px; }
+            .compare-card .info h3 { font-size: 0.78rem; }
+            .compare-card .info .meta { font-size: 0.65rem; }
+            .compare-divider { margin: 20px 0; gap: 8px; }
+            .compare-divider .arrow { width: 28px; height: 28px; font-size: 0.7rem; }
+
+            .numbers-bar {
+                grid-template-columns: 1fr 1fr;
+                padding: 16px 12px;
+                gap: 12px;
+                border-radius: 10px;
             }
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-                border-radius: 40px;
-                padding: 16px 24px;
-            }
-            .nav-links {
-                justify-content: center;
-                gap: 20px;
-            }
-            .section-title {
-                font-size: 1.8rem;
-                margin: 50px 0 30px;
-            }
-            .stats {
-                padding: 24px 20px;
-            }
-            .stat-item h3 {
-                font-size: 1.8rem;
-            }
-            .whatsapp-float {
-                width: 55px;
-                height: 55px;
-                font-size: 30px;
-                bottom: 20px;
-                right: 20px;
-            }
-            .contact-card {
-                padding: 12px 24px;
-                font-size: 0.9rem;
-            }
-            .about {
-                padding: 24px;
-            }
+            .numbers-bar .n-item .n-val { font-size: 1.2rem; }
+            .numbers-bar .n-item .n-label { font-size: 0.58rem; margin-top: 2px; }
+
+            .acc-header { padding: 12px 14px; }
+            .acc-header .day-name { font-size: 0.82rem; }
+            .acc-header .day-type { font-size: 0.65rem; }
+            .acc-body.open { padding: 0 14px 14px; }
+            .exercise-row { padding: 7px 0; }
+            .exercise-row .ex-name { font-size: 0.78rem; }
+            .exercise-row .ex-sets { font-size: 0.68rem; padding: 2px 8px; }
+            .acc-footer { font-size: 0.65rem; margin-top: 8px; padding-top: 8px; }
+
+            .diet-tabs { gap: 6px; margin-bottom: 20px; }
+            .diet-tab { padding: 8px 16px; font-size: 0.78rem; }
+            .meal-card { padding: 12px; gap: 10px; margin-bottom: 8px; }
+            .meal-icon { width: 32px; height: 32px; font-size: 0.8rem; border-radius: 8px; }
+            .meal-content h4 { font-size: 0.82rem; }
+            .meal-content .time { font-size: 0.65rem; }
+            .meal-content ul li { font-size: 0.75rem; }
+            .diet-cycle { padding: 16px; margin-top: 20px; }
+            .diet-cycle h4 { font-size: 0.85rem; }
+            .diet-cycle .cycle-grid { grid-template-columns: repeat(3, 1fr); }
+            .diet-cycle .cycle-item { padding: 8px; font-size: 0.7rem; }
+            .cheap-tips { padding: 16px; }
+            .cheap-tips h4 { font-size: 0.85rem; }
+            .cheap-tips .tip-grid { grid-template-columns: repeat(2, 1fr); }
+            .cheap-tips .tip-item { padding: 8px 10px; font-size: 0.7rem; }
+            .cheap-tips .tip-item .emoji { font-size: 1.1rem; }
+
+            .tips-grid { grid-template-columns: 1fr; gap: 10px; }
+            .tip-card { padding: 16px; border-radius: 12px; }
+            .tip-card .tip-num { font-size: 1.6rem; }
+            .tip-card h4 { font-size: 0.88rem; margin-bottom: 4px; }
+            .tip-card p { font-size: 0.78rem; }
+
+            .testimonial .quote-mark { font-size: 3rem; margin-bottom: -14px; }
+            .testimonial blockquote { font-size: 0.95rem; }
+            .testimonial cite { margin-top: 14px; }
+            .testimonial cite .name { font-size: 0.85rem; }
+            .testimonial cite .role { font-size: 0.7rem; }
+
+            footer { padding: 24px 14px 18px; }
+            footer .socials { gap: 10px; margin-bottom: 12px; }
+            footer .socials a { width: 34px; height: 34px; font-size: 0.9rem; }
+            footer p { font-size: 0.7rem; }
         }
 
         @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 1.8rem;
-            }
-            .btn-primary, .btn-outline {
-                padding: 10px 20px;
-                font-size: 0.85rem;
-            }
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero { min-height: 65vh; }
+            .hero h1 { font-size: 1.7rem; }
+            .hero-sub { font-size: 0.8rem; }
+            .hero-stats { gap: 16px; }
+            .hero-stat .num { font-size: 1.2rem; }
+
+            .compare-grid { gap: 8px; }
+            .compare-card .tag { font-size: 0.5rem; padding: 2px 6px; }
+            .compare-card .info { padding: 8px 8px; }
+            .compare-card .info h3 { font-size: 0.7rem; }
+            .compare-card .info .meta { font-size: 0.6rem; }
+
+            .numbers-bar { grid-template-columns: 1fr 1fr; }
+
+            .diet-cycle .cycle-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Scrollbar personalizada */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #2ed573, #1e9b52);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #2ed573;
+        /* ===== OVERLAY RESPONSIVO ===== */
+        @media (max-width: 480px) {
+            .auth-box { padding: 28px 20px; }
+            .auth-box h1 { font-size: 1.3rem; }
+            .auth-box input { padding: 12px 14px; font-size: 0.95rem; }
+            .auth-btn { font-size: 0.9rem; padding: 12px; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
-    <div class="bg-animation"></div>
 
-    <!-- Botão WhatsApp Flutuante -->
-    <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Vim%20pelo%20site%20e%20quero%20começar%20agora!" class="whatsapp-float" target="_blank">
-        💬
-    </a>
-
-    <div class="container">
-        <!-- Navegação -->
-        <nav class="navbar">
-            <div class="logo">⚡ Matheus Odilon</div>
-            <ul class="nav-links">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#planos">Planos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
-
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Transforme seu corpo<br><span style="background: linear-gradient(135deg, #2ed573, #00ffaa); -webkit-background-clip: text; background-clip: text; color: transparent;">e sua vida</span></h1>
-                <p>Metodologia exclusiva com resultados garantidos. Treinos personalizados para você alcançar seus objetivos com saúde e eficiência.</p>
-                <div class="hero-buttons">
-                    <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Vim%20pelo%20site%20e%20quero%20começar%20agora!" class="btn-primary" target="_blank">🔥 Começar agora</a>
-                    <a href="#servicos" class="btn-outline">💪 Conhecer serviços</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="mt.jpg" alt="Matheus Odilon" onerror="this.src='https://via.placeholder.com/400x450?text=Matheus+Odilon'">
-            </div>
-        </section>
-
-        <!-- Stats -->
-        <div class="stats">
-            <div class="stat-item"><h3>+50</h3><p>Clientes ativos</p></div>
-            <div class="stat-item"><h3>2+</h3><p>Anos de experiência</p></div>
-            <div class="stat-item"><h3>98%</h3><p>de satisfação</p></div>
+    <!-- ========================================== -->
+    <!-- ===== OVERLAY DE AUTENTICAÇÃO (CADASTRO/LOGIN) ===== -->
+    <!-- ========================================== -->
+    <div id="auth-overlay">
+        <div class="auth-box" id="auth-box">
+            <!-- Conteúdo injetado via JS -->
         </div>
-
-        <!-- Sobre -->
-        <section id="sobre" class="about">
-            <div class="about-text">
-                <h2>Mais de 2 anos transformando vidas através do esporte</h2>
-                <p>Olá, meu nome é Matheus. Sou formado em Educação Física, ex-atleta profissional de futebol e, atualmente, atuo como professor de Educação Física, personal trainer e preparador de atletas. Minha missão é ajudar você a descobrir seu potencial máximo através de um método único que une ciência, motivação e resultados.</p>
-                <div style="margin: 24px 0;">
-                    <span class="badge">🏅 CREF 070786</span>
-                    <span class="badge">🎯 Especialista em Biomecânica</span>
-                    <span class="badge">💪 Fisiologia do Exercício</span>
-                    <span class="badge">⚡ Preparação de Atletas</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Serviços -->
-        <section id="servicos">
-            <h2 class="section-title">⚡ Como posso te ajudar?</h2>
-            <div class="cards-grid">
-                <div class="service-card">
-                    <h3>💻 Consultoria online</h3>
-                    <div class="price">R$ 100<span>/mês</span></div>
-                    <ul>
-                        <li>✅ Planilha de treino mensal</li>
-                        <li>✅ Suporte via WhatsApp</li>
-                        <li>✅ Ajustes de cargas semanais</li>
-                        <li>✅ Correção de execução por vídeo</li>
-                    </ul>
-                    <a href="https://wa.me/5521994812056?text=Olá!%20Tenho%20interesse%20na%20Consultoria%20online%20(R$100/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">🔥 Quero este serviço</a>
-                </div>
-                <div class="service-card">
-                    <h3>📊 Avaliação física + Ficha</h3>
-                    <div class="price">R$ 80<span>/avulso</span></div>
-                    <ul>
-                        <li>✅ Medidas e composição corporal</li>
-                        <li>✅ Testes de força e flexibilidade</li>
-                        <li>✅ Diagnóstico completo</li>
-                        <li>✅ Devolutiva detalhada</li>
-                    </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20agendar%20uma%20Avaliação%20física%20(R$80)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">📅 Agendar avaliação</a>
-                </div>
-                <div class="service-card">
-                    <h3>🏋️ Acompanhamento nos treinos</h3>
-                    <div class="price">R$ 600<span>/mês</span></div>
-                    <ul>
-                        <li>✅ Presencial ou online</li>
-                        <li>✅ Correção de execução em tempo real</li>
-                        <li>✅ Motivação e ajustes</li>
-                        <li>✅ Periodização avançada</li>
-                    </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20o%20acompanhamento%20nos%20treinos%20(R$600/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">💪 Quero treinar</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Planos -->
-        <section id="planos">
-            <h2 class="section-title">🏆 Planos especiais</h2>
-            <div class="cards-grid">
-                <div class="plan-card">
-                    <div class="badge-plan">🌟 Mais escolhido</div>
-                    <h3>Plano Mensal em Dupla</h3>
-                    <div class="price">R$ 800<span>/mês</span></div>
-                    <ul>
-                        <li>✅ 3 sessões por semana</li>
-                        <li>✅ Avaliação física mensal</li>
-                        <li>✅ Acompanhamento via app</li>
-                        <li>✅ Treino personalizado</li>
-                    </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20o%20Plano%20Mensal%20(R$800/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">✨ Assinar agora</a>
-                </div>
-                <div class="plan-card">
-                    <div class="badge-plan">💰 Melhor custo-benefício</div>
-                    <h3>Plano Trimestral</h3>
-                    <div class="price">R$ 250<span>/mês</span></div>
-                    <ul>
-                        <li>✅ 1 avaliação mensal</li>
-                        <li>✅ Treino personalizado</li>
-                        <li>✅ Suporte via app</li>
-                    </ul>
-                    <a href="https://wa.me/5521994812056?text=Quero%20o%20Plano%20Trimestral%20(R$250/mês)" class="btn-primary" style="width:100%; text-align:center;" target="_blank">🚀 Quero evoluir</a>
-                </div>
-                <!-- Card "Ficha de treino + acompanhamento" REMOVIDO -->
-            </div>
-        </section>
-
-        <!-- Depoimentos -->
-        <div class="testimonials">
-            <h2 class="section-title" style="margin-top:0;">💬 O que dizem meus clientes</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p>⭐️⭐️⭐️⭐️⭐️</p>
-                    <p>"Em 3 meses com o Matheus, minha evolução foi absurda! Atendimento online superou expectativas."</p>
-                    <strong style="color: #2ed573;">— Renata M.</strong>
-                </div>
-                <div class="testimonial-card">
-                    <p>⭐️⭐️⭐️⭐️⭐️</p>
-                    <p>"Melhor preparador que já tive. Sei que sou atleta amador, mas o cuidado é nível profissional."</p>
-                    <strong style="color: #2ed573;">— Carlos Lima</strong>
-                </div>
-                <div class="testimonial-card">
-                    <p>⭐️⭐️⭐️⭐️⭐️</p>
-                    <p>"Avaliação física muito completa e os treinos realmente personalizados. Recomendo demais!"</p>
-                    <strong style="color: #2ed573;">— Juliana S.</strong>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contato -->
-        <section id="contato">
-            <h2 class="section-title">🚀 Vamos transformar seu corpo?</h2>
-            <div class="contact-links">
-                <a href="https://wa.me/5521994812056?text=Olá%20Matheus!%20Quero%20mudar%20de%20vida!" class="contact-card" target="_blank">
-                    <span>💬</span> WhatsApp
-                </a>
-                <a href="https://www.instagram.com/matheusodilon31?igsh=MTZ5Nzd3ZnMzeGU5bw==" class="contact-card" target="_blank">
-                    <span>📷</span> Instagram
-                </a>
-                <a href="mailto:Matheusodilon011@gamil.com" class="contact-card">
-                    <span>✉️</span> E-mail
-                </a>
-            </div>
-        </section>
-
-        <footer>
-            <p>🔥 Matheus Odilon • CREF 070786 • Educação Física • Personal Trainer & Preparador de Atletas</p>
-            <p style="margin-top: 10px;">© 2026 | Transformando vidas com ciência e dedicação</p>
-        </footer>
     </div>
+
+    <!-- ========================================== -->
+    <!-- ===== SEU SITE ORIGINAL (sem alterações) ===== -->
+    <!-- ========================================== -->
+
+    <section class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-fire"></i> Resultados Comprovados
+            </div>
+            <h1>
+                Minha <span class="gradient-text">Transformação</span><br />
+                em 90 Dias
+            </h1>
+            <p class="hero-sub">
+                Como ganhei <strong style="color: var(--accent-light);">11 kg de massa muscular</strong> e
+                <strong style="color: var(--accent-light);">4 cm de braço</strong> com método, disciplina e consistência.
+            </p>
+            <a href="#resultados" class="hero-cta">
+                <i class="fas fa-arrow-down"></i> Ver minha evolução
+            </a>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="num">+11 kg</span>
+                    <span class="label">Massa muscular</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="num">+4 cm</span>
+                    <span class="label">Braço</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="num">90</span>
+                    <span class="label">Dias</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="num">5x</span>
+                    <span class="label">Treinos/semana</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="compare-section" id="resultados">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="eyebrow">A Prova Visual</span>
+                <h2>Antes <span style="color: var(--accent);">&</span> Depois</h2>
+                <p>Fotos reais, sem filtro. A diferença de 90 dias de treino intenso e alimentação estratégica.</p>
+            </div>
+
+            <div class="compare-grid reveal">
+                <div class="compare-card antes">
+                    <div class="img-wrap">
+                        <span class="tag">Antes</span>
+                        <img src="antes.jpeg" alt="Foto antes da transformação" />
+                    </div>
+                    <div class="info">
+                        <h3>Mês 1 — O Começo</h3>
+                        <p class="meta"><strong>61 kg</strong> · 22% BF · sem definição</p>
+                    </div>
+                </div>
+                <div class="compare-card depois">
+                    <div class="img-wrap">
+                        <span class="tag">Depois</span>
+                        <img src="depois.jpeg" alt="Foto depois da transformação" />
+                    </div>
+                    <div class="info">
+                        <h3>Mês 3 — O Resultado</h3>
+                        <p class="meta"><strong>72 kg</strong> · 14% BF · massa e definição</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compare-divider reveal">
+                <div class="line"></div>
+                <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="line"></div>
+            </div>
+
+            <div class="numbers-bar reveal">
+                <div class="n-item">
+                    <div class="n-val">+11 kg</div>
+                    <div class="n-label">Massa muscular</div>
+                </div>
+                <div class="n-item">
+                    <div class="n-val">+4 cm</div>
+                    <div class="n-label">Braço</div>
+                </div>
+                <div class="n-item">
+                    <div class="n-val">-8%</div>
+                    <div class="n-label">Gordura corporal</div>
+                </div>
+                <div class="n-item">
+                    <div class="n-val">90</div>
+                    <div class="n-label">Dias de jornada</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workout-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="eyebrow">O Método</span>
+                <h2>Diário de Treino</h2>
+                <p>Split UPPER / FULL LEGS — 5x por semana. Clique para expandir cada dia.</p>
+            </div>
+
+            <div class="accordion reveal">
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <div class="day-info">
+                            <div class="day-dot" style="background:#ef4444;"></div>
+                            <div>
+                                <span class="day-name">Segunda</span>
+                                <span class="day-type">— UPPER A</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down acc-icon"></i>
+                    </div>
+                    <div class="acc-body">
+                        <div class="exercise-row"><span class="ex-name">Supino reto com barra</span><span class="ex-sets">4×6–8</span></div>
+                        <div class="exercise-row"><span class="ex-name">Puxada alta pronada</span><span class="ex-sets">4×8–10</span></div>
+                        <div class="exercise-row"><span class="ex-name">Supino inclinado com halteres</span><span class="ex-sets">3×8–10</span></div>
+                        <div class="exercise-row"><span class="ex-name">Remada curvada</span><span class="ex-sets">3×6–8</span></div>
+                        <div class="exercise-row"><span class="ex-name">Elevação lateral</span><span class="ex-sets">4×12–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Tríceps na polia</span><span class="ex-sets">3×10–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Rosca direta</span><span class="ex-sets">3×8–10</span></div>
+                        <div class="acc-footer"><i class="fas fa-clock"></i> Descanso: 2–3 min (compostos) / 60–90s (isoladores)</div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <div class="day-info">
+                            <div class="day-dot" style="background:#10b981;"></div>
+                            <div>
+                                <span class="day-name">Terça</span>
+                                <span class="day-type">— FULL LEGS A</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down acc-icon"></i>
+                    </div>
+                    <div class="acc-body">
+                        <div class="exercise-row"><span class="ex-name">Agachamento livre</span><span class="ex-sets">4×6–8</span></div>
+                        <div class="exercise-row"><span class="ex-name">Leg press 45°</span><span class="ex-sets">3×8–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Stiff / RDL</span><span class="ex-sets">3×8–10</span></div>
+                        <div class="exercise-row"><span class="ex-name">Cadeira extensora</span><span class="ex-sets">3×12–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Mesa flexora</span><span class="ex-sets">3×10–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Panturrilha em pé</span><span class="ex-sets">4×10–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Abdominal na polia</span><span class="ex-sets">3×10–15</span></div>
+                        <div class="acc-footer"><i class="fas fa-clock"></i> Descanso: 2–3 min (compostos) / 60–90s (isoladores)</div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <div class="day-info">
+                            <div class="day-dot" style="background:#3b82f6;"></div>
+                            <div>
+                                <span class="day-name">Quinta</span>
+                                <span class="day-type">— UPPER B</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down acc-icon"></i>
+                    </div>
+                    <div class="acc-body">
+                        <div class="exercise-row"><span class="ex-name">Barra fixa ou puxada neutra</span><span class="ex-sets">4×6–10</span></div>
+                        <div class="exercise-row"><span class="ex-name">Supino inclinado com barra</span><span class="ex-sets">4×6–8</span></div>
+                        <div class="exercise-row"><span class="ex-name">Remada baixa</span><span class="ex-sets">3×8–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Crucifixo na máquina</span><span class="ex-sets">3×10–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Desenvolvimento com halteres</span><span class="ex-sets">3×8–10</span></div>
+                        <div class="exercise-row"><span class="ex-name">Elevação lateral</span><span class="ex-sets">3×12–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Rosca martelo</span><span class="ex-sets">3×10–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Tríceps francês</span><span class="ex-sets">3×10–12</span></div>
+                        <div class="acc-footer"><i class="fas fa-clock"></i> Descanso: 2–3 min (compostos) / 60–90s (isoladores)</div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <div class="day-info">
+                            <div class="day-dot" style="background:#f59e0b;"></div>
+                            <div>
+                                <span class="day-name">Sexta</span>
+                                <span class="day-type">— FULL LEGS B</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down acc-icon"></i>
+                    </div>
+                    <div class="acc-body">
+                        <div class="exercise-row"><span class="ex-name">Levantamento terra romeno</span><span class="ex-sets">4×6–8</span></div>
+                        <div class="exercise-row"><span class="ex-name">Hack squat</span><span class="ex-sets">4×8–10</span></div>
+                        <div class="exercise-row"><span class="ex-name">Cadeira flexora</span><span class="ex-sets">3×8–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Afundo búlgaro</span><span class="ex-sets">3×8–10 cada</span></div>
+                        <div class="exercise-row"><span class="ex-name">Cadeira extensora</span><span class="ex-sets">3×12–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Hip thrust</span><span class="ex-sets">3×8–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Panturrilha sentado</span><span class="ex-sets">4×12–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Elevação de pernas</span><span class="ex-sets">3×10–15</span></div>
+                        <div class="acc-footer"><i class="fas fa-clock"></i> Descanso: 2–3 min (compostos) / 60–90s (isoladores)</div>
+                    </div>
+                </div>
+                <div class="acc-item">
+                    <div class="acc-header" onclick="toggleAcc(this)">
+                        <div class="day-info">
+                            <div class="day-dot" style="background:#8b5cf6;"></div>
+                            <div>
+                                <span class="day-name">Sábado</span>
+                                <span class="day-type">— UPPER C</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down acc-icon"></i>
+                    </div>
+                    <div class="acc-body">
+                        <div class="exercise-row"><span class="ex-name">Supino máquina</span><span class="ex-sets">3×8–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Puxada alta</span><span class="ex-sets">3×8–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Remada unilateral</span><span class="ex-sets">3×8–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Crossover</span><span class="ex-sets">3×12–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Elevação lateral</span><span class="ex-sets">4×12–20</span></div>
+                        <div class="exercise-row"><span class="ex-name">Face pull</span><span class="ex-sets">3×12–15</span></div>
+                        <div class="exercise-row"><span class="ex-name">Rosca Scott</span><span class="ex-sets">3×10–12</span></div>
+                        <div class="exercise-row"><span class="ex-name">Tríceps corda</span><span class="ex-sets">3×10–15</span></div>
+                        <div class="acc-footer"><i class="fas fa-clock"></i> Descanso: 2–3 min (compostos) / 60–90s (isoladores)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header reveal" style="margin-top: 48px;">
+                <span class="eyebrow">Estratégia</span>
+                <h2>Progressão de Carga</h2>
+            </div>
+            <div class="tip-card reveal" style="max-width: 720px; margin: 0 auto;">
+                <div class="tip-num">01</div>
+                <h4>Regras de Ouro</h4>
+                <p style="margin-bottom: 10px;"><strong>RIR 1–3</strong> — sempre mantendo repetições em reserva, sem falhar nos compostos.</p>
+                <p style="margin-bottom: 10px;">Quando atingia o topo da faixa (ex: 8/8/8/8), <strong style="color:var(--accent-light);">aumentava a carga</strong> em 2–2,5 kg.</p>
+                <p style="margin-bottom: 10px;"><strong>Exemplo:</strong> Supino 80 kg → 8,8,7,6 → mantive até fazer 8,8,8,8 → depois subi para 82 kg.</p>
+                <p>Isoladores: ia mais perto da falha, principalmente na última série. Compostos pesados: evitava falha total para preservar o sistema nervoso.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="eyebrow">Alimentação</span>
+                <h2>O Que Comi para Ganhar Massa</h2>
+                <p>Dieta econômica e eficiente — 3 cardápios que se repetem em ciclo. Clique nos dias para ver cada um.</p>
+            </div>
+
+            <div class="diet-tabs reveal">
+                <div class="diet-tab active" onclick="switchDay(0, this)">🍚 Dia 1</div>
+                <div class="diet-tab" onclick="switchDay(1, this)">🍝 Dia 2</div>
+                <div class="diet-tab" onclick="switchDay(2, this)">🍳 Dia 3</div>
+            </div>
+
+            <div class="diet-day active" id="day0">
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-sun"></i></div>
+                    <div class="meal-content">
+                        <span class="time">☀️ Café da Manhã</span>
+                        <h4>Café da Manhã</h4>
+                        <ul>
+                            <li>3 ovos mexidos</li>
+                            <li>2 bananas</li>
+                            <li>60 g de aveia</li>
+                            <li>300 ml de leite</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-utensil-spoon"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🍛 Almoço</span>
+                        <h4>Almoço</h4>
+                        <ul>
+                            <li>200 g de arroz cozido</li>
+                            <li>1 concha de feijão</li>
+                            <li>150 g de frango</li>
+                            <li>Legumes/salada à vontade</li>
+                            <li>1 colher de sopa de óleo/azeite</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🥤 Lanche / Pré-treino</span>
+                        <h4>Lanche / Pré-treino</h4>
+                        <ul>
+                            <li>1 banana</li>
+                            <li>50 g de aveia</li>
+                            <li>300 ml de leite</li>
+                            <li>2 ovos cozidos</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-dumbbell"></i></div>
+                    <div class="meal-content">
+                        <span class="time">💪 Pós-treino / Jantar</span>
+                        <h4>Pós-treino / Jantar</h4>
+                        <ul>
+                            <li>200 g de arroz</li>
+                            <li>1 concha de feijão</li>
+                            <li>150 g de frango</li>
+                            <li>Legumes/salada</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-moon"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🌙 Antes de Dormir</span>
+                        <h4>Antes de Dormir</h4>
+                        <ul>
+                            <li>250 ml de leite</li>
+                            <li>1 banana</li>
+                            <li>30 g de aveia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diet-day" id="day1">
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-sun"></i></div>
+                    <div class="meal-content">
+                        <span class="time">☀️ Café da Manhã</span>
+                        <h4>Café da Manhã</h4>
+                        <ul>
+                            <li>3 ovos</li>
+                            <li>2 fatias de pão</li>
+                            <li>1 banana</li>
+                            <li>300 ml de leite</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-utensil-spoon"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🍛 Almoço</span>
+                        <h4>Almoço</h4>
+                        <ul>
+                            <li>200 g de arroz</li>
+                            <li>1 concha de feijão</li>
+                            <li>150 g de carne moída ou frango</li>
+                            <li>Legumes/salada</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🥤 Lanche / Pré-treino</span>
+                        <h4>Lanche / Pré-treino — Vitamina</h4>
+                        <ul>
+                            <li>300 ml de leite</li>
+                            <li>1 banana</li>
+                            <li>60 g de aveia</li>
+                            <li>2 ovos</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-dumbbell"></i></div>
+                    <div class="meal-content">
+                        <span class="time">💪 Pós-treino / Jantar</span>
+                        <h4>Pós-treino / Jantar</h4>
+                        <ul>
+                            <li>250 g de macarrão</li>
+                            <li>150 g de frango</li>
+                            <li>Molho de tomate</li>
+                            <li>Legumes/salada</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-moon"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🌙 Antes de Dormir</span>
+                        <h4>Antes de Dormir</h4>
+                        <ul>
+                            <li>2 ovos mexidos</li>
+                            <li>2 fatias de pão</li>
+                            <li>1 banana</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diet-day" id="day2">
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-sun"></i></div>
+                    <div class="meal-content">
+                        <span class="time">☀️ Café da Manhã</span>
+                        <h4>Café da Manhã</h4>
+                        <ul>
+                            <li>4 ovos mexidos</li>
+                            <li>2 bananas</li>
+                            <li>50 g de aveia</li>
+                            <li>300 ml de leite</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-utensil-spoon"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🍛 Almoço</span>
+                        <h4>Almoço</h4>
+                        <ul>
+                            <li>200 g de arroz</li>
+                            <li>1 concha de feijão</li>
+                            <li>150 g de frango</li>
+                            <li>Legumes/salada</li>
+                            <li>1 colher de sopa de óleo/azeite</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🥪 Lanche / Pré-treino</span>
+                        <h4>Lanche / Pré-treino</h4>
+                        <ul>
+                            <li>2 pães</li>
+                            <li>2 ovos</li>
+                            <li>1 banana</li>
+                            <li>250 ml de leite</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-dumbbell"></i></div>
+                    <div class="meal-content">
+                        <span class="time">💪 Pós-treino / Jantar</span>
+                        <h4>Pós-treino / Jantar</h4>
+                        <ul>
+                            <li>200 g de arroz</li>
+                            <li>1 concha de feijão</li>
+                            <li>150–200 g de frango</li>
+                            <li>Legumes/salada</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meal-card reveal">
+                    <div class="meal-icon"><i class="fas fa-moon"></i></div>
+                    <div class="meal-content">
+                        <span class="time">🌙 Antes de Dormir</span>
+                        <h4>Antes de Dormir</h4>
+                        <ul>
+                            <li>300 ml de leite</li>
+                            <li>40 g de aveia</li>
+                            <li>1 banana</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diet-cycle reveal">
+                <h4><i class="fas fa-sync-alt" style="color: var(--accent);"></i> Como Repetir o Ciclo</h4>
+                <div class="cycle-grid">
+                    <div class="cycle-item"><span class="day-label">Segunda</span><span class="day-plan">Dia 1</span></div>
+                    <div class="cycle-item"><span class="day-label">Terça</span><span class="day-plan">Dia 2</span></div>
+                    <div class="cycle-item"><span class="day-label">Quarta</span><span class="day-plan">Dia 3</span></div>
+                    <div class="cycle-item"><span class="day-label">Quinta</span><span class="day-plan">Dia 1</span></div>
+                    <div class="cycle-item"><span class="day-label">Sexta</span><span class="day-plan">Dia 2</span></div>
+                    <div class="cycle-item"><span class="day-label">Sábado</span><span class="day-plan">Dia 3</span></div>
+                    <div class="cycle-item"><span class="day-label">Domingo</span><span class="day-plan">Dia 1</span></div>
+                </div>
+                <p style="margin-top: 12px; font-size: 0.78rem; color: var(--text-dim); text-align: center;">
+                    E continua nesse ciclo indefinidamente.
+                </p>
+            </div>
+
+            <div class="cheap-tips reveal">
+                <h4><i class="fas fa-piggy-bank" style="color: var(--accent);"></i> Para Deixar Realmente Barato</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
+                    Você não precisa comprar vários tipos de carne. A base pode ser:
+                </p>
+                <div class="tip-grid">
+                    <div class="tip-item"><span class="emoji">🥚</span><strong>Ovos</strong><span>proteína barata</span></div>
+                    <div class="tip-item"><span class="emoji">🍗</span><strong>Frango</strong><span>principal fonte</span></div>
+                    <div class="tip-item"><span class="emoji">🍚</span><strong>Arroz</strong><span>carbo barato</span></div>
+                    <div class="tip-item"><span class="emoji">🫘</span><strong>Feijão</strong><span>carbo + proteína</span></div>
+                    <div class="tip-item"><span class="emoji">🍌</span><strong>Banana</strong><span>pré/pós-treino</span></div>
+                    <div class="tip-item"><span class="emoji">🥛</span><strong>Leite</strong><span>proteína + calorias</span></div>
+                    <div class="tip-item"><span class="emoji">🌾</span><strong>Aveia</strong><span>calorias baratas</span></div>
+                    <div class="tip-item"><span class="emoji">🍝</span><strong>Macarrão</strong><span>alternativa ao arroz</span></div>
+                    <div class="tip-item"><span class="emoji">🥖</span><strong>Pão</strong><span>praticidade</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="eyebrow">Aprendizados</span>
+                <h2>6 Lições que Aprendi</h2>
+                <p>O que realmente fez a diferença nessa jornada de 90 dias.</p>
+            </div>
+            <div class="tips-grid reveal">
+                <div class="tip-card">
+                    <div class="tip-num">01</div>
+                    <h4>Consistência > Intensidade</h4>
+                    <p>5x por semana deu mais resultado que treinar pesado 2x. A frequência vence a intensidade esporádica.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-num">02</div>
+                    <h4>Alimentação é 70%</h4>
+                    <p>Comer limpo e em superávit calórico controlado foi o divisor de águas. Não adianta treinar bem e comer mal.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-num">03</div>
+                    <h4>Sono Reparador</h4>
+                    <p>7–8h por noite acelerou recuperação e ganho de massa. O músculo cresce enquanto você descansa.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-num">04</div>
+                    <h4>Progressão de Carga</h4>
+                    <p>Anotar pesos e subir 2,5 kg por semana me fez evoluir de forma mensurável e constante.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-num">05</div>
+                    <h4>Não se Compare</h4>
+                    <p>Cada corpo responde de um jeito — foque no seu antes/depois. Sua única competição é você mesmo.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-num">06</div>
+                    <h4>Diário de Bordo</h4>
+                    <p>Registrar tudo (peso, medidas, fotos) me manteve motivado e me mostrou o progresso nos dias difíceis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>
+            <i class="fas fa-heart heart"></i> Obrigado por fazer parte da minha jornada!
+        </p>
+        <p style="margin-top: 6px;">
+            Este material é exclusivo para você. Compartilhe apenas com quem realmente quer mudar.
+        </p>
+        <p style="margin-top: 10px; font-size: 0.7rem; color: var(--text-dim);">
+            &copy; 2026 · Minha Evolução · Todos os direitos reservados
+        </p>
+        <button id="logout-btn" class="logout-btn" style="display: none;">Sair (trocar de conta)</button>
+    </footer>
+
+    <script>
+        // ====================================================
+        // ===== SISTEMA DE CADASTRO / LOGIN (front-end) ======
+        // ====================================================
+
+        const overlay = document.getElementById('auth-overlay');
+        const authBox = document.getElementById('auth-box');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // Chaves do localStorage
+        const STORAGE_USER = 'meu_site_user';
+        const STORAGE_PASS = 'meu_site_pass';
+        const STORAGE_LOGGED = 'meu_site_logado';
+
+        // Verifica se já existe conta salva
+        function hasAccount() {
+            return localStorage.getItem(STORAGE_USER) !== null && localStorage.getItem(STORAGE_PASS) !== null;
+        }
+
+        // Verifica se o usuário está logado (sessão ativa)
+        function isLoggedIn() {
+            return localStorage.getItem(STORAGE_LOGGED) === 'true';
+        }
+
+        // Codifica/decodifica para não deixar a senha em texto puro (apenas ofuscamento básico)
+        function encode(str) {
+            return btoa(str);
+        }
+        function decode(str) {
+            return atob(str);
+        }
+
+        // Salva conta
+        function saveAccount(user, pass) {
+            localStorage.setItem(STORAGE_USER, encode(user));
+            localStorage.setItem(STORAGE_PASS, encode(pass));
+        }
+
+        // Recupera credenciais
+        function getAccount() {
+            const user = localStorage.getItem(STORAGE_USER);
+            const pass = localStorage.getItem(STORAGE_PASS);
+            if (user && pass) {
+                return { user: decode(user), pass: decode(pass) };
+            }
+            return null;
+        }
+
+        // Login bem-sucedido
+        function doLogin() {
+            localStorage.setItem(STORAGE_LOGGED, 'true');
+            overlay.classList.add('hidden');
+            logoutBtn.style.display = 'inline-block';
+        }
+
+        // Logout (apenas desloga, não apaga a conta)
+        function doLogout() {
+            localStorage.removeItem(STORAGE_LOGGED);
+            overlay.classList.remove('hidden');
+            logoutBtn.style.display = 'none';
+            renderAuthScreen(); // recarrega a tela (login ou cadastro)
+        }
+
+        // Renderiza a tela correta (cadastro ou login)
+        function renderAuthScreen() {
+            if (hasAccount()) {
+                renderLogin();
+            } else {
+                renderSignup();
+            }
+        }
+
+        // Tela de cadastro
+        function renderSignup() {
+            authBox.innerHTML = `
+                <span class="lock-icon"><i class="fas fa-user-plus"></i></span>
+                <h1>Crie sua <span class="gradient-text">Conta</span></h1>
+                <p class="sub">Defina um usuário e senha para acessar o conteúdo</p>
+                <form id="signup-form" autocomplete="off">
+                    <div class="field">
+                        <label>👤 Usuário</label>
+                        <input type="text" id="signup-user" placeholder="Escolha um nome de usuário" required />
+                    </div>
+                    <div class="field">
+                        <label>🔒 Senha</label>
+                        <input type="password" id="signup-pass" placeholder="Crie uma senha" required />
+                    </div>
+                    <div class="field">
+                        <label>✅ Confirmar Senha</label>
+                        <input type="password" id="signup-pass2" placeholder="Digite a senha novamente" required />
+                    </div>
+                    <button type="submit" class="auth-btn">Criar conta</button>
+                    <div class="auth-error" id="auth-error"></div>
+                    <p class="helper">🔐 Após criar, faça login com seus dados.</p>
+                </form>
+            `;
+
+            const form = document.getElementById('signup-form');
+            const errorEl = document.getElementById('auth-error');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const user = document.getElementById('signup-user').value.trim();
+                const pass = document.getElementById('signup-pass').value.trim();
+                const pass2 = document.getElementById('signup-pass2').value.trim();
+
+                // Limpa mensagem anterior
+                errorEl.textContent = '';
+                errorEl.className = 'auth-error';
+
+                if (!user || !pass || !pass2) {
+                    errorEl.textContent = '❌ Preencha todos os campos.';
+                    errorEl.className = 'auth-error error';
+                    return;
+                }
+                if (pass.length < 4) {
+                    errorEl.textContent = '❌ A senha deve ter pelo menos 4 caracteres.';
+                    errorEl.className = 'auth-error error';
+                    return;
+                }
+                if (pass !== pass2) {
+                    errorEl.textContent = '❌ As senhas não coincidem.';
+                    errorEl.className = 'auth-error error';
+                    return;
+                }
+
+                // Salva conta
+                saveAccount(user, pass);
+
+                // Mostra mensagem de sucesso
+                errorEl.textContent = '✅ Conta criada com sucesso! Faça login abaixo.';
+                errorEl.className = 'auth-error success';
+
+                // Limpa os campos
+                document.getElementById('signup-user').value = '';
+                document.getElementById('signup-pass').value = '';
+                document.getElementById('signup-pass2').value = '';
+
+                // Após 1 segundo, vai para a tela de login
+                setTimeout(() => {
+                    renderLogin();
+                    // Coloca uma mensagem de boas-vindas no login
+                    const loginError = document.getElementById('auth-error');
+                    if (loginError) {
+                        loginError.textContent = '✅ Conta criada! Agora faça login.';
+                        loginError.className = 'auth-error success';
+                    }
+                }, 1000);
+            });
+        }
+
+        // Tela de login
+        function renderLogin() {
+            authBox.innerHTML = `
+                <span class="lock-icon"><i class="fas fa-sign-in-alt"></i></span>
+                <h1>Bem-vindo de <span class="gradient-text">volta</span></h1>
+                <p class="sub">Digite seus dados para acessar o conteúdo</p>
+                <form id="login-form" autocomplete="off">
+                    <div class="field">
+                        <label>👤 Usuário</label>
+                        <input type="text" id="login-user" placeholder="Seu usuário" required />
+                    </div>
+                    <div class="field">
+                        <label>🔒 Senha</label>
+                        <input type="password" id="login-pass" placeholder="Sua senha" required />
+                    </div>
+                    <button type="submit" class="auth-btn">Entrar</button>
+                    <div class="auth-error" id="auth-error"></div>
+                    <p class="helper">🔐 Acesso restrito ao proprietário da conta.</p>
+                </form>
+            `;
+
+            const form = document.getElementById('login-form');
+            const errorEl = document.getElementById('auth-error');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const user = document.getElementById('login-user').value.trim();
+                const pass = document.getElementById('login-pass').value.trim();
+
+                const creds = getAccount();
+                if (!creds) {
+                    // Se por algum motivo não houver conta, recarrega para cadastro
+                    renderAuthScreen();
+                    return;
+                }
+
+                if (user === creds.user && pass === creds.pass) {
+                    doLogin();
+                } else {
+                    errorEl.textContent = '❌ Usuário ou senha incorretos.';
+                    errorEl.className = 'auth-error error';
+                }
+            });
+        }
+
+        // Verifica se já está logado ao carregar
+        if (isLoggedIn()) {
+            // Confere se a conta ainda existe (caso tenha sido apagada manualmente)
+            if (hasAccount()) {
+                overlay.classList.add('hidden');
+                logoutBtn.style.display = 'inline-block';
+            } else {
+                // Se a conta foi deletada, desloga e vai para cadastro
+                localStorage.removeItem(STORAGE_LOGGED);
+                renderAuthScreen();
+            }
+        } else {
+            renderAuthScreen();
+        }
+
+        // Evento do botão sair
+        logoutBtn.addEventListener('click', function() {
+            if (confirm('Deseja sair da sua conta? Você precisará fazer login novamente.')) {
+                doLogout();
+            }
+        });
+
+        // ====================================================
+        // ===== SEU SCRIPT ORIGINAL (sem alterações) =========
+        // ====================================================
+
+        function toggleAcc(header) {
+            const item = header.parentElement;
+            const body = header.nextElementSibling;
+            const isOpen = body.classList.contains('open');
+
+            document.querySelectorAll('.acc-body').forEach(b => {
+                b.classList.remove('open');
+                b.style.maxHeight = '0';
+            });
+            document.querySelectorAll('.acc-header').forEach(h => h.classList.remove('active'));
+
+            if (!isOpen) {
+                body.classList.add('open');
+                body.style.maxHeight = body.scrollHeight + 'px';
+                header.classList.add('active');
+            }
+        }
+
+        function switchDay(dayIndex, tabEl) {
+            document.querySelectorAll('.diet-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.diet-day').forEach(d => d.classList.remove('active'));
+            tabEl.classList.add('active');
+            document.getElementById('day' + dayIndex).classList.add('active');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
